@@ -13,10 +13,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    // http://localhost:8089/swagger-ui.html#/
     @Bean
     public Docket api() {
 
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.examenParcial.controllers")).paths(PathSelectors.any()).build();
-    }
-    
+    } 
 }

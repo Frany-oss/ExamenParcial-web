@@ -25,21 +25,18 @@ public class Product {
     )
 
     @Column(
-            name="id",
-            updatable = false
+            name="id"
     )
     private Long id;
 
     @Column(
         name = "code",
-        updatable = false,
         columnDefinition = "TEXT"
     )
     private String code;
 
     @Column(
         name = "description",
-        updatable = false,
         columnDefinition = "TEXT"
     )
     private String description;
