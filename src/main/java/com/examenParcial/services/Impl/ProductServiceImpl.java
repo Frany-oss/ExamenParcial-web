@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // ---------- guardar y actualizar -----------
-    public ProductDto save(ProductDto productDto) {
+    public ProductDto save(ProductDto productDto) throws WebException {
 
         Product product = this.dtoEntity(productDto);
         Product saveProduct = this.productRepository.save(product);
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
     // ------------- eliminar por ID --------------
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws WebException {
         this.productRepository.deleteById(id);
         
     }
