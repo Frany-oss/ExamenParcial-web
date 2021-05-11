@@ -2,10 +2,10 @@ package com.examenParcial.controllers;
 
 import java.util.List;
 
-import com.examenParcial.dtos.ProductDto;
+import com.examenParcial.dtos.SubscriptionDto;
 import com.examenParcial.exceptions.WebException;
 import com.examenParcial.responses.WebResponse;
-import com.examenParcial.services.ProductService;
+import com.examenParcial.services.SubscriptionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,48 +20,47 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/api/plans")
+public class SubscriptionController {
     
     @Autowired
-    private ProductService productService;
+    private SubscriptionService subscriptionService;
 
-    // --------- get product by Id -----------
+    // --------- get subscription by Id -----------
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("{productId}")
-    public WebResponse<ProductDto> getproductById(@PathVariable Long productId) throws WebException {
-        return new WebResponse<>("Succes", String.valueOf(HttpStatus.OK), "OK", this.productService.findById(productId));
+    @GetMapping("{id}")
+    public WebResponse<SubscriptionDto> getproductById(@PathVariable Long id) throws WebException {
+        return new WebResponse<>("Succes", String.valueOf(HttpStatus.OK), "OK", this.subscriptionService.findById(id));
     }
 
-    // -------- get all the products ----------
+    // -------- get all the subscriptions ----------
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public WebResponse<List<ProductDto>> getRestaurants()
+    public WebResponse<List<SubscriptionDto>> getRestaurants()
             throws WebException{
         return new WebResponse<>("Succes",String.valueOf(HttpStatus.OK),"OK",
-                this.productService.findAll());
+                this.subscriptionService.findAll());
     }
 
-    // --------- actualizar/guardar producto ----------
+    // --------- actualizar/crear subscription ----------
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    public WebResponse<ProductDto> save(@RequestBody ProductDto productDto) throws WebException {
-        productDto.setId(null);
+    public WebResponse<SubscriptionDto> create(@RequestBody SubscriptionDto subscriptionDto) throws WebException {
         return new WebResponse<>("Succes",String.valueOf(HttpStatus.OK),"OK",
-                this.productService.save(productDto));
+                this.subscriptionService.create(subscriptionDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public WebResponse<ProductDto> update(@RequestBody ProductDto productDto) throws WebException {
+    public WebResponse<SubscriptionDto> update(@RequestBody SubscriptionDto subscriptionDto) throws WebException {
         return new WebResponse<>("Succes",String.valueOf(HttpStatus.OK),"OK",
-                this.productService.save(productDto));
+                this.subscriptionService.save(subscriptionDto));
     }
 
-    // ----------- eliminar producto por id ----------------
+    // ----------- eliminar subscription por id ----------------
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("{productId}")
-    public void deleteById(@PathVariable Long productId) throws WebException {
-       this.productService.deleteById(productId);
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable Long id) throws WebException {
+       this.subscriptionService.deleteById(id);
     }
 }

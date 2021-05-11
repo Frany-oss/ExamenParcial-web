@@ -1,6 +1,6 @@
 package com.examenParcial.dtos;
 
-import com.examenParcial.entities.Product;
+import com.examenParcial.entities.Subscription;
 import org.springframework.beans.BeanUtils;
 
 import lombok.AllArgsConstructor;
@@ -10,12 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class SubscriptionDto {
     private Long id;
-    private String code;
+    private String name;
     private String description;
+    private Integer price;
+    private Integer status = 1;
 
-    public ProductDto(Product product) {
+    public SubscriptionDto(Subscription product) {
         BeanUtils.copyProperties(product, this);
     }
 }
