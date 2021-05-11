@@ -63,7 +63,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscription = new Subscription();
         List<Subscription> prices = subscriptionRepository.findByPrice(subscriptionDto.getPrice());
         
-        subscription.setStatus(subscriptionDto.getStatus());
+        if (subscriptionDto.getStatus() == 1 || subscriptionDto.getStatus() == -1){
+            subscription.setStatus(subscriptionDto.getStatus());
+        } else {
+            throw new IllegalArgumentException("Invalid Status");
+        }
         subscription.setName(subscriptionDto.getName());
         subscription.setDescription(subscriptionDto.getDescription());
         subscription.setPrice(subscriptionDto.getPrice());
@@ -81,7 +85,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return subscriptionRepository.findById(id).orElseThrow(
                                                 ()-> new IllegalArgumentException("Price is already assigned to an existing Plan"));
     }
-    
+
     // ------------- eliminar por ID --------------
     @Override
     public void deleteById(Long id) throws WebException {
